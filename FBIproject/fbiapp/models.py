@@ -8,6 +8,28 @@
 from django.db import models
 
 
+class Options(models.Model):
+    option_id = models.IntegerField(primary_key=True)
+    question = models.ForeignKey('Questions', models.DO_NOTHING)
+    op1 = models.CharField(max_length=50, blank=True, null=True)
+    op2 = models.CharField(max_length=50, blank=True, null=True)
+    op3 = models.CharField(max_length=50, blank=True, null=True)
+    op4 = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Options'
+
+
+class Questions(models.Model):
+    question_id = models.IntegerField(primary_key=True)
+    text = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'Questions'
+
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
