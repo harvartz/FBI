@@ -1746,6 +1746,22 @@ body.is-preload #header .content .inner {
 
 /* Survey */
 
+/* .qbox {
+  background-color: rgb(255, 255, 255);
+  color: rgba(19, 21, 25, 0.9);
+  border-radius: 4px;
+  border: solid 1px #ffffff;
+  margin-bottom: 2rem;
+  padding: 1.5em;
+}
+
+.answer .p:hover {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+.answer .p:active {
+  background-color: rgba(255, 255, 255, 0.175);
+} */
 
 /* Footer */
 

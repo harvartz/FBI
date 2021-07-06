@@ -11,7 +11,6 @@ from django.utils import timezone
 
 class Options(models.Model):
     option_id = models.IntegerField(primary_key=True)
-    question = models.ForeignKey('Questions', models.DO_NOTHING)
     op1 = models.CharField(max_length=50, blank=True, null=True)
     op2 = models.CharField(max_length=50, blank=True, null=True)
     op3 = models.CharField(max_length=50, blank=True, null=True)
@@ -25,6 +24,7 @@ class Options(models.Model):
 class Questions(models.Model):
     question_id = models.IntegerField(primary_key=True)
     text = models.CharField(max_length=50)
+    option = models.ForeignKey(Options, models.DO_NOTHING)
 
     class Meta:
         managed = False

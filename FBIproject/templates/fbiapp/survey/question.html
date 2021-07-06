@@ -22,10 +22,42 @@
       background-color: rgba(255, 255, 255, 0.175);
     }
 </style>
-<script>
-    $("#abox").click(function(){
-        alert($(this).val());
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    var flag=false;
+    var nchecked ="";
+
+    $(document).on('click', '#1', function(){ localStorage.answer1 = $(this).text(); });
+    $(document).on('click', '#2', function(){ localStorage.answer2 = $(this).text(); });
+    $(document).on('click', '#3', function(){ localStorage.answer3 = $(this).text(); });
+    $(document).on('click', '#4', function(){ localStorage.answer4 = $(this).text(); });
+    $(document).on('click', '#5', function(){ localStorage.answer5 = $(this).text(); });
+
+
+    $(document).on('click', '.save', function(){
+        if(typeof localStorage.answer1 == "undefined" || typeof localStorage.answer2 == "undefined" || typeof localStorage.answer3 == "undefined" 
+        || typeof localStorage.answer4 == "undefined" || typeof localStorage.answer5 == "undefined" ){ flag = true; }
+
+        if(flag){
+            if(typeof localStorage.answer1 == "undefined"){ nchecked += "1번째\n"; } 
+            if(typeof localStorage.answer2 == "undefined"){ nchecked += "2번째\n"; } 
+            if(typeof localStorage.answer3 == "undefined"){ nchecked += "3번째\n"; } 
+            if(typeof localStorage.answer4 == "undefined"){ nchecked += "4번째\n"; } 
+            if(typeof localStorage.answer5 == "undefined"){ nchecked += "5번째\n"; } 
+
+            alert("앗!\n\n"+ nchecked +"\n질문에 답하지 않으셨어요!");
+            alert("응답기록 : " + localStorage.answer1 + " | " + localStorage.answer2 + " | " +localStorage.answer3 + " | " +localStorage.answer4 + " | " +localStorage.answer5);
+            flag = false;
+        }
+        else {
+            alert("최종 결과를 확인하세요 : \n" + localStorage.answer1 + " | " + localStorage.answer2 + " | " +localStorage.answer3 + " | " +localStorage.answer4 + " | " +localStorage.answer5);
+        }
     });
+
+    $(document).on('click', '.reset', function(){
+        localStorage.clear();
+    });
+
 </script>
         <!--로그인. 회원가입. 설문조사-->
 
@@ -46,22 +78,23 @@
                                         </div>
                                         <div class="answer">
                                             {% if question.option.op1 != None %}
-                                                <p id="abox" class="box">{{ question.option.op1 }}</p>
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op1 }}</p>
                                             {% endif %}
                                             {% if question.option.op2 != None %}                                        
-                                                <p id="abox" class="box">{{ question.option.op2 }}</p>
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op2 }}</p>
                                             {% endif %}
                                             {% if question.option.op3 != None %}                                            
-                                                <p id="abox" class="box">{{ question.option.op3 }}</p>
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op3 }}</p>
                                             {% endif %}
                                             {% if question.option.op4 != None %}
-                                                <p id="abox" class="box">{{ question.option.op4 }}</p>
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op4 }}</p>
                                             {% endif %}
                                         </div>
                                         {% if question.question_id == 5 %}
                                             <nav>
                                                 <ul>
-                                                    <li class="save"><a href="{% url 'main'%}">제출</a></li>
+                                                    <!-- <li class="save"><a href="{% url 'main'%}">제출</a></li> -->
+                                                    <li class="save"><a href="">제출</a></li>
                                                     <li class="reset"><a href="{% url 'survey' %}">다시 하기</a></li>
                                                 </ul>
                                             </nav>
