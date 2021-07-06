@@ -1,0 +1,46 @@
+{% extends 'fbiapp/base.html' %}
+{% load static %}
+
+{% block content %}
+        <!--로그인. 회원가입. 설문조사-->
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="content">
+							<div class="inner">
+								<h2 class="major">My Page</h2>
+								<ul style= "display:inline; 
+                                            text-align:left;
+                                            line-height: 1.0cm;
+                                            font-weight: 200" class="actions">
+									<li> 아이디 : {{user.user_id}} </li>
+                                    <li> 이름 : {{user.name}}</li>
+                                    <li> 생년월일 : 950808</li>
+									<li> 나이대 : {{user.age}}</li>
+									<li> 상황 : {{user.state}}</li>
+									<li> 환경 : {{user.environment}}</li>
+									<li> 핵심 키워드 : {{user.keyword}}</li>
+								</ul>	
+							</div>
+						</div>
+						
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+						
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 충북대학교 소프트웨어학과 캡스톤디자인 16팀 스쿨피자 <a href="https://github.com/SchoolPizza">Github</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+{% endblock content %}

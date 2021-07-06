@@ -14,10 +14,12 @@
 							<div class="inner">
 								<h2 class="major">Project FBI</h2>
 								<ul class="actions">
-									<li><input type="submit" id='send' value="로그인" class="primary" /></li>
-									<li><input type="reset" value="회원가입" /></li>
+									<li><a href="{% url 'login' %}"><input type="submit" id='send' value="Login" class="primary"/></a></li>
+									<li><a href="{% url 'signup' %}"><input type="submit" id='send' value="Sign up"/></a></li>
                                     <!-- 로그인 했고 && 이전 데이터 없는 경우에만 메뉴 보이도록 처리-->
 									<li><a href="{% url 'survey' %}" class="button">설문조사</a></li>
+									<li><a href="{% url 'mypage' user.user_id %}"><input type="submit" id='send' value="Mypage"/></a></li>
+									<li><a href="" class="button">설문조사</a></li>
 								</ul>	
 							</div>
 						</div>

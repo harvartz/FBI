@@ -1,0 +1,50 @@
+{% extends 'fbiapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div id="wrapper">
+
+  <!-- Header -->
+    <header id="header">
+      <div class="content">
+        <div class="inner">
+          <h2 class="major">login</h2>
+          <ul class="actions">
+            <form action="{% url 'login' %}" method="POST">
+              <div class="form-group" style="margin:10px;">
+                {% csrf_token %}
+                <label for="user_id">사용자 ID</label>
+                <input type="text" id="user_id" name="user_id" required="required"/>
+              </div>
+
+              <div class="form-group" style="margin:10px;">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required="required"/>
+              </div>
+              <div class="form-group" style="margin-top:50px;">
+                <button type="submit" >Login</button>
+              </div>
+            </form>
+          </ul>	
+        </div>
+      </div>
+      
+    </header>
+
+  <!-- Main -->
+    <div id="main">
+      
+    </div>
+
+  <!-- Footer -->
+    <footer id="footer">
+      <p class="copyright">&copy; 충북대학교 소프트웨어학과 캡스톤디자인 16팀 스쿨피자 <a href="https://github.com/SchoolPizza">Github</a>.</p>
+    </footer>
+
+</div>
+
+<!-- BG -->
+<div id="bg"></div>
+{% endblock content %}
