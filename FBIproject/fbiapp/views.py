@@ -7,6 +7,12 @@ from django.contrib import auth
 def main(request):
     return render(request, 'fbiapp/index.html')
 
+
+
+def mypage(request, user_id):
+    user = get_object_or_404(User, user_id = user_id)
+    return render(request, 'fbiapp/mypage.html',{'user':user})
+
 # Create your views here.
 def signup(request):
     if request.method == "POST":
