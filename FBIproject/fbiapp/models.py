@@ -103,6 +103,13 @@ class CustomUserManager(BaseUserManager):
         user = self.create_user(
             password=password,
             user_id=user_id,
+            name=null,
+            age=null,
+            keyword=null,
+            state=null,
+            environment = null,
+            cycle = null,
+
         )
         user.is_superuser = True
         user.is_admin = True
