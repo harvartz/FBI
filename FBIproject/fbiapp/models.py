@@ -104,11 +104,11 @@ class CustomUserManager(BaseUserManager):
             password=password,
             user_id=user_id,
             name=null,
-            age=null,
+            age=0,
             keyword=null,
-            state=null,
-            environment = null,
-            cycle = null,
+            state=0,
+            environment =0,
+            cycle =0,
 
         )
         user.is_superuser = True
