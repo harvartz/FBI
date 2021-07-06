@@ -10,10 +10,9 @@ def main(request):
 def survey(request):
     return render(request, 'fbiapp/survey/survey.html')
 
-
-def mypage(request, user_id):
-    user = get_object_or_404(User, user_id = user_id)
-    return render(request, 'fbiapp/mypage.html',{'user':user})
+    
+def mypage(request):
+    return render(request, 'fbiapp/mypage.html')
 
 # Create your views here.
 def signup(request):

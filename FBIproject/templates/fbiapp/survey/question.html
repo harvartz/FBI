@@ -22,6 +22,11 @@
       background-color: rgba(255, 255, 255, 0.175);
     }
 </style>
+<script>
+    $("#abox").click(function(){
+        alert($(this).val());
+    });
+</script>
         <!--로그인. 회원가입. 설문조사-->
 
 		<!-- Wrapper -->
@@ -41,16 +46,16 @@
                                         </div>
                                         <div class="answer">
                                             {% if question.option.op1 != None %}
-                                                <p class="box">{{ question.option.op1 }}</p>
+                                                <p id="abox" class="box">{{ question.option.op1 }}</p>
                                             {% endif %}
                                             {% if question.option.op2 != None %}                                        
-                                                <p class="box">{{ question.option.op2 }}</p>
+                                                <p id="abox" class="box">{{ question.option.op2 }}</p>
                                             {% endif %}
                                             {% if question.option.op3 != None %}                                            
-                                                <p class="box">{{ question.option.op3 }}</p>
+                                                <p id="abox" class="box">{{ question.option.op3 }}</p>
                                             {% endif %}
                                             {% if question.option.op4 != None %}
-                                             <p class="box">{{ question.option.op4 }}</p>
+                                                <p id="abox" class="box">{{ question.option.op4 }}</p>
                                             {% endif %}
                                         </div>
                                         {% if question.question_id == 5 %}
