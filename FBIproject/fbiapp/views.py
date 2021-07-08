@@ -19,7 +19,6 @@ def survey(request):
 def mypage(request):
     return render(request, 'fbiapp/mypage.html')
 
-# Create your views here.
 def signup(request):
     if request.method == "POST":
         if request.POST["password"] == request.POST["password_confirm"]:
@@ -62,7 +61,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('login')
+    return redirect('main')
     
 def question(request):
     questions = Questions.objects.all()

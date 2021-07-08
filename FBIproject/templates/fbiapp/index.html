@@ -14,11 +14,15 @@
 							<div class="inner">
 								<h2 class="major">Project FBI</h2>
 								<ul class="actions">
+									{% if user.is_authenticated %}
+									<li><a href="{% url 'mypage' %}"><input type="submit" id='send' value="Mypage"/></a></li>
+									<li><a href="{% url 'logout' %}"><input type="submit" id='send' value="Logout"/></a></li>
+									<!-- 이전 데이터 없는 경우에만 메뉴 보이도록 처리-->
+									<li><a href="{% url 'survey' %}" class="button">설문조사</a></li>
+									{% else %}
 									<li><a href="{% url 'login' %}"><input type="submit" id='send' value="Login" class="primary"/></a></li>
 									<li><a href="{% url 'signup' %}"><input type="submit" id='send' value="Sign up"/></a></li>
-                                    <!-- 로그인 했고 && 이전 데이터 없는 경우에만 메뉴 보이도록 처리-->
-									<li><a href="{% url 'survey' %}" class="button">설문조사</a></li>
-									<li><a href="{% url 'mypage' %}"><input type="submit" id='send' value="Mypage"/></a></li>
+									{% endif %}
 								</ul>	
 							</div>
 						</div>
