@@ -2,18 +2,23 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import User
 from .forms import UserLoginForm, UserSignupForm
 from django.contrib import auth
+from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+from .models import *
+from django.core.paginator import Paginator
+
 
 
 def main(request):
     return render(request, 'fbiapp/index.html')
 
+def survey(request):
+    return render(request, 'fbiapp/survey/survey.html')
 
+    
+def mypage(request):
+    return render(request, 'fbiapp/mypage.html')
 
-def mypage(request, user_id):
-    user = get_object_or_404(User, user_id = user_id)
-    return render(request, 'fbiapp/mypage.html',{'user':user})
-
-# Create your views here.
 def signup(request):
     if request.method == "POST":
         if request.POST["password"] == request.POST["password_confirm"]:
@@ -56,4 +61,18 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('login')
+    return redirect('main')
+    
+def question(request):
+    questions = Questions.objects.all()
+    page_numbers_range = 1
+    paginator = Paginator(questions, page_numbers_range)
+    page = request.GET.get('page')
+    questions = paginator.get_page(page)
+    current_page = int(page) if page else 1
+    start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
+    end_index = start_index + page_numbers_range
+    page_range = paginator.page_range[start_index:end_index]
+    return render(request, 'fbiapp/survey/question.html', {'questions':questions, 'page_range':page_range, 'paginator':paginator})
+    
+    

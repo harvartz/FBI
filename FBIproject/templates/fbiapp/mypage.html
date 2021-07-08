@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
         <!--로그인. 회원가입. 설문조사-->
 
 		<!-- Wrapper -->
@@ -16,13 +17,15 @@
                                             text-align:left;
                                             line-height: 1.0cm;
                                             font-weight: 200" class="actions">
-									<li> 아이디 : {{user.user_id}} </li>
-                                    <li> 이름 : {{user.name}}</li>
-                                    <li> 생년월일 : 950808</li>
-									<li> 나이대 : {{user.age}}</li>
-									<li> 상황 : {{user.state}}</li>
-									<li> 환경 : {{user.environment}}</li>
-									<li> 핵심 키워드 : {{user.keyword}}</li>
+									{% if user.is_authenticated %}
+										<li> 아이디 : {{user.user_id}} </li>
+                                    	<li> 이름 : {{user.name}}</li>
+										<li> 나이대 : {{user.age}}</li>
+										<li> 핵심 키워드 : {{user.keyword}}</li>
+										<li> 상태 : {{user.state}}</li>
+										<li> 환경 : {{user.environment}}</li>
+										<li> 주기 : {{user.cycle}}</li>
+									{% endif %}
 								</ul>	
 							</div>
 						</div>

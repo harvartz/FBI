@@ -1,0 +1,40 @@
+{% extends 'fbiapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+        <!--로그인. 회원가입. 설문조사-->
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-envelope"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>잠깐!</h1>
+								<p>처음 방문하셨네요! 
+								더 나은 구매를 위해 당신의 취향을 알려주세요. <a hreff="">약 1-2분 가량</a> 소모됩니다.</p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li class="start"><a href="{% url 'question' %}">시 작</a></li>
+								<li class="later"><a href="{% url 'main'%}">다음에 하기</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 충북대학교 소프트웨어학과 캡스톤디자인 16팀 스쿨피자 <a href="https://github.com/SchoolPizza">Github</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+{% endblock content %}

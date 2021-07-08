@@ -1,0 +1,142 @@
+{% extends 'fbiapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<style>
+
+    .qbox {
+      background-color: rgb(255, 255, 255);
+      color: rgba(19, 21, 25, 0.9);
+      border-radius: 4px;
+      border: solid 1px #ffffff;
+      margin-bottom: 2rem;
+      padding: 1.5em;
+    }
+
+    .answer .box:hover {
+      background-color: rgba(255, 255, 255, 0.075);
+    }
+
+    .answer .box:active {
+      background-color: rgba(255, 255, 255, 0.175);
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    var flag=false;
+    var nchecked ="";
+
+    $(document).on('click', '#1', function(){ localStorage.answer1 = $(this).text(); });
+    $(document).on('click', '#2', function(){ localStorage.answer2 = $(this).text(); });
+    $(document).on('click', '#3', function(){ localStorage.answer3 = $(this).text(); });
+    $(document).on('click', '#4', function(){ localStorage.answer4 = $(this).text(); });
+    $(document).on('click', '#5', function(){ localStorage.answer5 = $(this).text(); });
+
+
+    $(document).on('click', '.save', function(){
+        if(typeof localStorage.answer1 == "undefined" || typeof localStorage.answer2 == "undefined" || typeof localStorage.answer3 == "undefined" 
+        || typeof localStorage.answer4 == "undefined" || typeof localStorage.answer5 == "undefined" ){ flag = true; }
+
+        if(flag){
+            if(typeof localStorage.answer1 == "undefined"){ nchecked += "1번째\n"; } 
+            if(typeof localStorage.answer2 == "undefined"){ nchecked += "2번째\n"; } 
+            if(typeof localStorage.answer3 == "undefined"){ nchecked += "3번째\n"; } 
+            if(typeof localStorage.answer4 == "undefined"){ nchecked += "4번째\n"; } 
+            if(typeof localStorage.answer5 == "undefined"){ nchecked += "5번째\n"; } 
+
+            alert("앗!\n\n"+ nchecked +"\n질문에 답하지 않으셨어요!");
+            alert("응답기록 : " + localStorage.answer1 + " | " + localStorage.answer2 + " | " +localStorage.answer3 + " | " +localStorage.answer4 + " | " +localStorage.answer5);
+            flag = false;
+        }
+        else {
+            alert("최종 결과를 확인하세요 : \n" + localStorage.answer1 + " | " + localStorage.answer2 + " | " +localStorage.answer3 + " | " +localStorage.answer4 + " | " +localStorage.answer5);
+        }
+    });
+
+    $(document).on('click', '.reset', function(){
+        localStorage.clear();
+    });
+
+</script>
+        <!--로그인. 회원가입. 설문조사-->
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="status-bar">
+						</div>
+                        <!-- 질문 -->
+                        <div id="content">
+                            <article id="start">
+                                <section id="question" class="container">
+                                    {% for question in questions %}
+                                        <div class="qbox box">
+                                            <p>{{ question.text }}</p>
+                                        </div>
+                                        <div class="answer">
+                                            {% if question.option.op1 != None %}
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op1 }}</p>
+                                            {% endif %}
+                                            {% if question.option.op2 != None %}                                        
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op2 }}</p>
+                                            {% endif %}
+                                            {% if question.option.op3 != None %}                                            
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op3 }}</p>
+                                            {% endif %}
+                                            {% if question.option.op4 != None %}
+                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op4 }}</p>
+                                            {% endif %}
+                                        </div>
+                                        {% if question.question_id == 5 %}
+                                            <nav>
+                                                <ul>
+                                                    <!-- <li class="save"><a href="{% url 'main'%}">제출</a></li> -->
+                                                    <li class="save"><a href="">제출</a></li>
+                                                    <li class="reset"><a href="{% url 'survey' %}">다시 하기</a></li>
+                                                </ul>
+                                            </nav>
+                                        {% endif %}
+                                    {% endfor %}
+                                </section>
+                            </article>
+                        </div>
+                        <!-- 페이지네이터 -->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                {% if questions.has_previous %}
+                                <li class="page-item"> <a class="page-link" href="?page={{ questions.previous_page_number }}"><span>&laquo;</span></a> </li>
+                                {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#"><span>&laquo;</span> </a> </li>
+                                {% endif %}
+                                {% for page in paginator.page_range %}
+                                <li {% if questions.number == page %} class="page-item active" {% endif %}>
+                                  <a class="page-link" href="?page={{ page }}"><span>{{ page }}</span></a>
+                                </li>
+                                {% endfor %}
+                                {% if questions.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ questions.next_page_number }}">
+                                        <span>&raquo;</span>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">
+                                        <span>&raquo;</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                          </nav>
+					</header>
+
+			</div>
+
+		<!-- BG -->
+    
+			<div id="bg"></div>
+
+{% endblock content %}
