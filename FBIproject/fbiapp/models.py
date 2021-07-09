@@ -101,12 +101,12 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, user_id, name, age, keyword, state, environment, cycle,  password = None):
         user = self.model(
             user_id=user_id,
-            name=name,
-            age=age,
-            keyword=keyword,
-            state=state,
-            environment = environment,
-            cycle = cycle,
+            name=None,
+            age=0,
+            keyword=None,
+            state=0,
+            environment =0,
+            cycle =0,
         )
         user.set_password(password)
         user.is_active = True
@@ -117,9 +117,9 @@ class CustomUserManager(BaseUserManager):
         user = self.create_user(
             password=password,
             user_id=user_id,
-            name=null,
+            name=None,
             age=0,
-            keyword=null,
+            keyword=None,
             state=0,
             environment =0,
             cycle =0,
