@@ -14,19 +14,36 @@
       padding: 1.5em;
     }
 
-    .answer .box:hover {
+    .answer_list .box:hover {
       background-color: rgba(255, 255, 255, 0.075);
     }
 
-    .answer .box:active {
-      background-color: rgba(255, 255, 255, 0.175);
+    .click {
+        background-color: rgba(255, 255, 255, 0.175);
     }
+    
 </style>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+    // 설문조사 답변 - 클릭 시 색상 변경
+
+    $(document).on('click', '.answer' ,function(){
+        console.log("click");
+        $('.answer').removeClass("click");
+        $(this).addClass("click");
+    });
+
+    /* 코드 리팩토링 필요 */
+    /* view로 보낼 설문조사 결과 뽑아내기 */
+
     var flag=false;
     var nchecked ="";
 
+    /* 반복문 처리 안되는지? */
+    /* localStorage 이외에 새로고침 영향 안받는 방법? 
+     * 문제 1 : localStorage - 선택 변경 될 때 마다 저장하니까 (인덱스 늘어나서) 반복문 적용하기 어려움 : key 못 씀 & answer 숫자를 카운터 변수 처리 x
+     * 문제 2 : 그리고 너무 길어서 보기 싫음.
+     */
     $(document).on('click', '#1', function(){ localStorage.answer1 = $(this).text(); });
     $(document).on('click', '#2', function(){ localStorage.answer2 = $(this).text(); });
     $(document).on('click', '#3', function(){ localStorage.answer3 = $(this).text(); });
@@ -34,6 +51,7 @@
     $(document).on('click', '#5', function(){ localStorage.answer5 = $(this).text(); });
 
 
+    /* 반복문 처리 안되는지? */
     $(document).on('click', '.save', function(){
         if(typeof localStorage.answer1 == "undefined" || typeof localStorage.answer2 == "undefined" || typeof localStorage.answer3 == "undefined" 
         || typeof localStorage.answer4 == "undefined" || typeof localStorage.answer5 == "undefined" ){ flag = true; }
@@ -50,13 +68,34 @@
             flag = false;
         }
         else {
+            var result = { answer1: localStorage.answer1, answer2: localStorage.answer2, answer3: localStorage.answer3, answer4: localStorage.answer4, answer5: localStorage.answer5 };
             alert("최종 결과를 확인하세요 : \n" + localStorage.answer1 + " | " + localStorage.answer2 + " | " +localStorage.answer3 + " | " +localStorage.answer4 + " | " +localStorage.answer5);
+            surveyResultSave(result);
+            location.href="{% url 'main' %}";
+            localStorage.clear();
         }
     });
 
     $(document).on('click', '.reset', function(){
         localStorage.clear();
     });
+
+    function surveyResultSave(result) {
+        $.ajax({
+            url: "{% url 'result' %}",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify(result),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }).done(function (data) {
+            console.log("전송 성공 : ", data);
+        }).fail(function (error) {
+            console.log("전송 실패 : ", error);
+        });
+
+    }
 
 </script>
         <!--로그인. 회원가입. 설문조사-->
@@ -76,25 +115,25 @@
                                         <div class="qbox box">
                                             <p>{{ question.text }}</p>
                                         </div>
-                                        <div class="answer">
+                                        <div class="answer_list">
+                                            <!-- 여기도 반복문 처리하고 싶다..! -->
                                             {% if question.option.op1 != None %}
-                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op1 }}</p>
+                                                <p id="{{ question.question_id }}" class="answer box">{{ question.option.op1 }}</p>
                                             {% endif %}
                                             {% if question.option.op2 != None %}                                        
-                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op2 }}</p>
+                                                <p id="{{ question.question_id }}" class="answer box" >{{ question.option.op2 }}</p>
                                             {% endif %}
                                             {% if question.option.op3 != None %}                                            
-                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op3 }}</p>
+                                                <p id="{{ question.question_id }}" class="answer box">{{ question.option.op3 }}</p>
                                             {% endif %}
                                             {% if question.option.op4 != None %}
-                                                <p id="{{ question.question_id }}" class="box">{{ question.option.op4 }}</p>
+                                                <p id="{{ question.question_id }}" class="answer box">{{ question.option.op4 }}</p>
                                             {% endif %}
                                         </div>
                                         {% if question.question_id == 5 %}
                                             <nav>
                                                 <ul>
-                                                    <!-- <li class="save"><a href="{% url 'main'%}">제출</a></li> -->
-                                                    <li class="save"><a href="">제출</a></li>
+                                                    <li class="save"><a>제출</a></li>
                                                     <li class="reset"><a href="{% url 'survey' %}">다시 하기</a></li>
                                                 </ul>
                                             </nav>

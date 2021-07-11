@@ -5,7 +5,7 @@ class UserSignupForm(forms.ModelForm):
     
     class Meta:
         model = User
-        fields = {'user_id', 'password', 'name','age', 'keyword','state','environment','cycle' }
+        fields = {'user_id', 'password', 'name', 'age', 'keyword','state','environment','cycle' }
 
 
 class UserLoginForm(forms.ModelForm):
@@ -13,3 +13,10 @@ class UserLoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = {'user_id', 'password'}
+
+
+class UserSurveyResultForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = {'user_id', 'age', 'keyword', 'state', 'environment', 'cycle'}
