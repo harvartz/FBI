@@ -17,5 +17,5 @@ urlpatterns = [
     path('logout/', user_views.logout, name="logout"),
     path('signup/', user_views.signup, name="signup"),
     # Input 페이지
-     path('input/', recommendation_views.input, name="input"),   
+    #  path('input/', recommendation_views.input, name="input"),   
 ] 
