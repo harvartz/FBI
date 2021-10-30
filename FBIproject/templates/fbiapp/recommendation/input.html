@@ -10,7 +10,16 @@
 <div id="wrapper">
     <!-- Header -->
         <header id="header">
-            <canvas id="chart" width="800" height="450"></canvas>
+            <form method="GET" action="{% url 'input' %}">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <ul class="actions">
+                    <!-- 제출 누르면 결과페이지로! -->
+                    <li><input type="submit"></li>
+                    <li><a href="{% url 'input' %}" class="button">다시하기</a></li>
+                </ul>
+            </form>
         </header>
     <!-- Footer -->
         <footer id="footer">
@@ -18,51 +27,7 @@
         </footer>
 </div>
 
-<script type="text/javascript">
-    var endpoint = 'test/'
-    var chartData = []
-
-    $.ajax({
-        method : "GET",
-        url : endpoint,
-        success: function(data){
-            labels=  ["냄새", "생리통", "생리량", "신체활동", "실내활동"]
-            chartData = data.datasets
-            new Chart(document.getElementById("chart"), {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{ 
-                        label: "항목",
-                        backgroundColor: ["red", "yellow", "green", "blue", "purple"],
-                        data: chartData
-                    }]
-                }, 
-                options: {
-                    legend: { display: false },
-                    title: {
-                        display: true,
-                        text: "input에 해당하는 추천 결과 입니다.",
-                    },
-                },
-            });
-        },
-        error: function(error_data){
-            console.log("error")
-            console.log(error_data) 
-        }
-    })
-
-</script>
-
 <!-- BG -->
     <div id="bg"></div>
-
-<!-- <form method="POST" action="{% url 'input' %}">
-    {% csrf_token %}
-    <input type="text" name="test">
-    <button class="send_btn" onclick="show_eng()" type="button">제출</button>
-</form>
-<div id="div_id"></div> -->
 
 {% endblock content %}
