@@ -99,3 +99,9 @@ def result(request):
         print("유저 : ", user.age, user.keyword, user.state, user.environment, user.cycle)
         user.save()
         return render(request, 'fbiapp/index.html', {'result': result})
+
+
+ # 추천 기능 관련 
+    
+def input(request):
+    return render(request, 'fbiapp/recommendation/input.html')
