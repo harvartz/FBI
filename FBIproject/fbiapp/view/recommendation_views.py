@@ -10,13 +10,13 @@ def input(request):
         form = InputForm(request.GET)
         if form.is_valid():
             # 입력 결과
-            smell = form.cleaned_data['smell']
-            amount = form.cleaned_data['amount']
-            pain = form.cleaned_data['pain']
-            outside = form.cleaned_data['outside']
-            inside = form.cleaned_data['inside']
+            type = form.cleaned_data['type']
+            topSheet = form.cleaned_data['topSheet']
+            absorbent = form.cleaned_data['absorbent']
+            madeIn = form.cleaned_data['madeIn']
+            price= dict(form.fields['price'].choices)[form.cleaned_data['price']]
 
-            print(smell, amount, pain, outside, inside)
+            print(type, topSheet, absorbent, madeIn, price)
 
 
             # 모델 결과 
