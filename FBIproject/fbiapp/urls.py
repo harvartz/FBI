@@ -16,6 +16,8 @@ urlpatterns = [
     path('login/', user_views.login, name="login"),
     path('logout/', user_views.logout, name="logout"),
     path('signup/', user_views.signup, name="signup"),
-    # Input 페이지
+    # 추천기능 
+    path('api/result/', recommendation_views.RecommendationView.as_view(), name="result_api"),
+    path('result/', recommendation_views.result, name="result"),
     #  path('input/', recommendation_views.input, name="input"),   
 ] 
