@@ -16,7 +16,8 @@ import json
 def main(request):
     return render(request, 'fbiapp/index.html')
 
+
  # 마이페이지 기능 관련
    
-def mypage(request):
-    return render(request, 'fbiapp/mypage.html')
+# def mypage(request):
+#     return render(request, 'fbiapp/mypage.html')
