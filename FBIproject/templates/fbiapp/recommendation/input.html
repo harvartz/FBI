@@ -1,0 +1,33 @@
+{% extends 'fbiapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Header -->
+        <header id="header">
+            <form method="GET" action="{% url 'input' %}">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <ul class="actions">
+                    <!-- 제출 누르면 결과페이지로! -->
+                    <li><input type="submit"></li>
+                    <li><a href="{% url 'input' %}" class="button">다시하기</a></li>
+                </ul>
+            </form>
+        </header>
+    <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright">&copy; 충북대학교 소프트웨어학과 캡스톤디자인 16팀 스쿨피자 <a href="https://github.com/SchoolPizza">Github</a>.</p>
+        </footer>
+</div>
+
+<!-- BG -->
+    <div id="bg"></div>
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'fbiapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Header -->
+        <header id="header">
+            <canvas id="chart" width="800" height="450"></canvas>
+        </header>
+    <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright">&copy; 충북대학교 소프트웨어학과 캡스톤디자인 16팀 스쿨피자 <a href="https://github.com/SchoolPizza">Github</a>.</p>
+        </footer>
+</div>
+
+<script type="text/javascript">
+    var chartData = []
+
+    // 차트 x label 
+    labels=  ["냄새", "생리통", "생리량", "신체활동", "실내활동"]
+    // 차트 데이터 - view에서 넘겨주는 변수 
+    chartData = {{ datasets }}
+    new Chart(document.getElementById("chart"), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{ 
+                label: "항목",
+                backgroundColor: ["red", "yellow", "green", "blue", "purple"],
+                data: chartData
+            }]
+        }, 
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "input에 해당하는 추천 결과 입니다.",
+            },
+        },
+    });
+
+</script>
+
+<!-- BG -->
+    <div id="bg"></div>
+
+
+{% endblock content %}
