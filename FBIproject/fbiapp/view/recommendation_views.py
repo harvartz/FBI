@@ -26,3 +26,12 @@ class RecommendationView(APIView):
 def result(request):
     context = {}
     return render(request, 'fbiapp/recommendation/result.html')
+
+
+def input(request):
+    return render(request, 'fbiapp/recommendation/input.html')
+
+def test(request, *args, **kwargs):
+    item = [3000, 1000, 402, 302, 100]
+    data = {"datasets" : item}
+    return JsonResponse(data)

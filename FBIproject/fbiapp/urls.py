@@ -19,5 +19,6 @@ urlpatterns = [
     # 추천기능 
     path('api/result/', recommendation_views.RecommendationView.as_view(), name="result_api"),
     path('result/', recommendation_views.result, name="result"),
-    #  path('input/', recommendation_views.input, name="input"),   
+    path('input/', recommendation_views.input, name="input"),   
+    path('input/test/', recommendation_views.test, name="test"),   
 ] 
