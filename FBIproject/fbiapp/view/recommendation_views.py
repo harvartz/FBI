@@ -20,8 +20,13 @@ def input(request):
 
 
             # 모델 결과 
-            item = [3000, 1000, 402, 302, 100]
-            return render(request, 'fbiapp/recommendation/result.html', {'datasets' : item})
+            item1 = [3000, 1000, 402, 302, 100]
+            item2 = [5000, 4000, 2000, 1000, 500]
+            item3 = [200, 4100, 100, 300, 50]
+            item4 = [300, 6000, 2402, 3000, 10]
+            item5 = [3000, 2800, 50, 9, 2000]
+            return render(request, 'fbiapp/recommendation/result.html', 
+            {'datasets1' : item1, 'datasets2' : item2, 'datasets2' : item2, 'datasets3' : item3, 'datasets4' : item4, 'datasets5' : item5})
 
         else:
             form = InputForm()
