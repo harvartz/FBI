@@ -10,7 +10,7 @@
 <div id="wrapper">
     <!-- Header -->
         <header id="header">
-            <form method="GET" action="{% url 'input' %}">
+            <form method="GET" action="{% url 'input' %}" class="inputform" style="color : white;">
                 {% csrf_token %}
                 {{ form }}
                 <br>

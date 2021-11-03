@@ -5,6 +5,8 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -19,19 +21,19 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                   <div class="carousel-item active">  
-                    <canvas id="chartContainer1" class="chart" style="width:100%; height:600px;"></canvas>
+                    <canvas id="chartContainer1" class="chart" style="width:100%; height:500px;"></canvas>
                   </div>
                   <div class="carousel-item">
-                    <canvas id="chartContainer2" class="chart" style="width:100%; height:600px;"></canvas>
+                    <canvas id="chartContainer2" class="chart" style="width:100%; height:500px;"></canvas>
                   </div>
                   <div class="carousel-item">
-                   <canvas id="chartContainer3" class="chart" style="width:100%; height:600px;"></canvas>
+                   <canvas id="chartContainer3" class="chart" style="width:100%; height:500px;"></canvas>
                   </div>
                   <div class="carousel-item">
-                    <canvas id="chartContainer4" class="chart" style="width:100%; height:600px;"></canvas>
+                    <canvas id="chartContainer4" class="chart" style="width:100%; height:500px;"></canvas>
                   </div>
                   <div class="carousel-item">
-                   <canvas id="chartContainer5" class="chart" style="width:100%; height:600px;"></canvas>
+                   <canvas id="chartContainer5" class="chart" style="width:100%; height:500px;"></canvas>
                   </div>
                 </div>
                
@@ -42,14 +44,13 @@
                 <a class="carousel-control-next" href="#chart-carousel" data-slide="next">
                   <span class="carousel-control-next-icon"></span>
                 </a>
-              </div> <!-- Carousel -->
+              </div> 
         </header>
     <!-- Footer -->
         <footer id="footer">
             <p class="copyright">&copy; 충북대학교 소프트웨어학과 캡스톤디자인 16팀 스쿨피자 <a href="https://github.com/SchoolPizza">Github</a>.</p>
         </footer>
 </div>
-
 <script type="text/javascript">
 
     // 차트 데이터 - view에서 넘겨주는 변수 
@@ -67,25 +68,50 @@
     height = $('#chart-carousel').height();
 
     $('.carousel').carousel({
-        interval: 2000
+        interval: 5000
     });
 
     // 차트 1번 생리량
     chart = new Chart(document.getElementById("chartContainer1"), {
+        plugins: [{
+            beforeInit: function(chart, options) {
+            chart.legend.afterFit = function() {
+                this.height = this.height + 30;
+            };
+            }
+        }],
         type: 'pie',
         data: {
             labels: ["아주 적음","적음", "보통", "많음", "아주 많음"],
             datasets: [{ 
                 label: "생리량",
-                backgroundColor: ["red", "yellow", "green", "blue", "purple"],
+                backgroundColor: ["rgba(42,44,59,0.8)", "rgba(84,102,240,0.6)", "rgba(72,91,240,0.6)", "rgba(33,48,163,0.6)", "rgba(60,81,240,0.6)"],
                 data: chartData1
             }]
         }, 
+        // plugins: [ChartDataLabels],
         options: {
-            legend: { display: true },
+            elements: {
+                arc: {
+                    borderWidth: 0.4
+                }
+            },
+            legend: { 
+                display: true,
+                position: 'top',
+                labels : {
+                    fontColor : 'rgba(255,255,255,0.7)',
+                    boxWidth: 20,
+                    padding: 20,
+                },
+             },
             title: {
                 display: true,
                 text: "생리량",
+                fontColor : '#FFFFFF',
+                fontSize: 20,
+                fontstyle: 'bold',
+                position: 'top',
             },
         },
     });
@@ -94,20 +120,44 @@
     
     // // 차트 2번 생리통
     chart = new Chart(document.getElementById("chartContainer2"), {
+        plugins: [{
+            beforeInit: function(chart, options) {
+            chart.legend.afterFit = function() {
+                this.height = this.height + 30;
+            };
+            }
+        }],
         type: 'pie',
         data: {
             labels: ["통증 없음","조금 아픔", "아픔", "많이 아픔", "매우 아픔"],
             datasets: [{ 
                 label: "생리통",
-                backgroundColor: ["red", "yellow", "green", "blue", "purple"],
+                backgroundColor: ["rgba(42,44,59,0.8)", "rgba(84,102,240,0.6)", "rgba(72,91,240,0.6)", "rgba(33,48,163,0.6)", "rgba(60,81,240,0.6)"],
                 data: chartData2
             }]
         }, 
         options: {
-            legend: { display: true },
+            elements: {
+                arc: {
+                    borderWidth: 0.4
+                }
+            },
+            legend: { 
+                display: true,
+                position: 'top',
+                labels : {
+                    fontColor : 'rgba(255,255,255,0.7)',
+                    boxWidth: 20,
+                    padding: 20
+                },
+             },
             title: {
                 display: true,
                 text: "생리통",
+                fontColor : '#FFFFFF',
+                fontSize: 20,
+                fontstyle: 'bold',
+                position: 'top',
             },
         },
     });
@@ -116,20 +166,44 @@
     
     // // 차트 3번 냄새
     chart = new Chart(document.getElementById("chartContainer3"), {
+        plugins: [{
+            beforeInit: function(chart, options) {
+            chart.legend.afterFit = function() {
+                this.height = this.height + 30;
+            };
+            }
+        }],
         type: 'pie',
         data: {
             labels: ["아주 약함","약함", "보통(냄)", "강함", "아주 강함"],
             datasets: [{ 
                 label: "냄새",
-                backgroundColor: ["red", "yellow", "green", "blue", "purple"],
+                backgroundColor: ["rgba(42,44,59,0.8)", "rgba(84,102,240,0.6)", "rgba(72,91,240,0.6)", "rgba(33,48,163,0.6)", "rgba(60,81,240,0.6)"],
                 data: chartData3
             }]
         }, 
         options: {
-            legend: { display: true },
+            elements: {
+                arc: {
+                    borderWidth: 0.4
+                }
+            },
+            legend: { 
+                display: true,
+                position: 'top',
+                labels : {
+                    fontColor : 'rgba(255,255,255,0.7)',
+                    boxWidth: 20,
+                    padding: 20
+                },
+             },
             title: {
                 display: true,
                 text: "냄새",
+                fontColor : '#FFFFFF',
+                fontSize: 20,
+                fontstyle: 'bold',
+                position: 'top',
             },
         },
     });
@@ -138,20 +212,44 @@
     
     // // 차트 4번 신체활동
     chart = new Chart(document.getElementById("chartContainer4"), {
+        plugins: [{
+            beforeInit: function(chart, options) {
+            chart.legend.afterFit = function() {
+                this.height = this.height + 30;
+            };
+            }
+        }],
         type: 'pie',
         data: {
             labels: ['달리기', '자전거 타기', '헬스', '댄스', '요가'],
             datasets: [{ 
                 label: "신체활동",
-                backgroundColor: ["red", "yellow", "green", "blue", "purple"],
+                backgroundColor: ["rgba(42,44,59,0.8)", "rgba(84,102,240,0.6)", "rgba(72,91,240,0.6)", "rgba(33,48,163,0.6)", "rgba(60,81,240,0.6)"],
                 data: chartData4
             }]
         }, 
         options: {
-            legend: { display: true },
+            elements: {
+                arc: {
+                    borderWidth: 0.4
+                }
+            },
+            legend: { 
+                display: true,
+                position: 'top',
+                labels : {
+                    fontColor : 'rgba(255,255,255,0.7)',
+                    boxWidth: 20,
+                    padding: 20
+                },
+             },
             title: {
                 display: true,
                 text: "신체활동",
+                fontColor : '#FFFFFF',
+                fontSize: 20,
+                fontstyle: 'bold',
+                position: 'top',
             },
         },
     });
@@ -160,20 +258,44 @@
     
     // // 차트 5번 실내활동
     chart = new Chart(document.getElementById("chartContainer5"), {
+        plugins: [{
+            beforeInit: function(chart, options) {
+            chart.legend.afterFit = function() {
+                this.height = this.height + 30;
+            };
+            }
+        }],
         type: 'pie',
         data: {
             labels: ['TV보기', '동영상 시청', '독서', '아이돌보기', '친구와 통화하기', '공부하기'],
             datasets: [{ 
                 label: "실내활동",
-                backgroundColor: ["red", "yellow", "green", "blue", "purple"],
+                backgroundColor: ["rgba(42,44,59,0.8)", "rgba(84,102,240,0.6)", "rgba(72,91,240,0.6)", "rgba(33,48,163,0.6)", "rgba(60,81,240,0.6)", "rgba(240,208,52,0.8)"],
                 data: chartData5
             }]
         }, 
         options: {
-            legend: { display: true },
+            elements: {
+                arc: {
+                    borderWidth: 0.4
+                }
+            },
+            legend: { 
+                display: true,
+                position: 'top',
+                labels : {
+                    fontColor : 'rgba(255,255,255,0.7)',
+                    boxWidth: 20,
+                    padding: 20
+                },
+             },
             title: {
                 display: true,
                 text: "실내활동",
+                fontColor : '#FFFFFF',
+                fontSize: 20,
+                fontstyle: 'bold',
+                position: 'top',
             },
         },
     });

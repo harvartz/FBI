@@ -1803,3 +1803,7 @@ body.is-article-visible #footer {
 body.is-preload #footer {
   opacity: 0;
 }
+
+.inputform .select {
+  color: white;
+}
