@@ -55,6 +55,7 @@
     // 차트 x label 
     labels=  ["냄새", "생리통", "생리량", "신체활동", "실내활동"]
     // 차트 데이터 - view에서 넘겨주는 변수 
+    // '생리량', '생리통', '냄새', '신체활동', '실내활동'
     var chartData1 = {{ datasets1 }}
     var chartData2 = {{ datasets2 }}
     var chartData3 = {{ datasets3 }}
@@ -71,13 +72,13 @@
         interval: 2000
     });
 
-    // 차트 1번 
+    // 차트 1번 생리량
     chart = new Chart(document.getElementById("chartContainer1"), {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: ["아주 적음","적음", "보통", "많음", "아주 많음"],
             datasets: [{ 
-                label: "항목",
+                label: "생리량",
                 backgroundColor: ["red", "yellow", "green", "blue", "purple"],
                 data: chartData1
             }]
@@ -93,13 +94,13 @@
     chart.render();
     charts.push(chart);
     
-    // // 차트 2번 
+    // // 차트 2번 생리통
     chart = new Chart(document.getElementById("chartContainer2"), {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: ["통증 없음","조금 아픔", "아픔", "많이 아픔", "매우 아픔"],
             datasets: [{ 
-                label: "항목",
+                label: "생리통",
                 backgroundColor: ["red", "yellow", "green", "blue", "purple"],
                 data: chartData2
             }]
@@ -115,13 +116,13 @@
     chart.render();
     charts.push(chart);
     
-    // // 차트 3번 
+    // // 차트 3번 냄새
     chart = new Chart(document.getElementById("chartContainer3"), {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: ["아주 약함","약함", "보통(냄)", "강함", "아주 강함"],
             datasets: [{ 
-                label: "항목",
+                label: "냄새",
                 backgroundColor: ["red", "yellow", "green", "blue", "purple"],
                 data: chartData3
             }]
@@ -137,13 +138,13 @@
     chart.render();
     charts.push(chart);
     
-    // // 차트 4번 
+    // // 차트 4번 신체활동
     chart = new Chart(document.getElementById("chartContainer4"), {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: ['달리기', '자전거 타기', '헬스', '댄스', '요가'],
             datasets: [{ 
-                label: "항목",
+                label: "신체활동",
                 backgroundColor: ["red", "yellow", "green", "blue", "purple"],
                 data: chartData4
             }]
@@ -159,13 +160,13 @@
     chart.render();
     charts.push(chart);
     
-    // // 차트 5번 
+    // // 차트 5번 실내활동
     chart = new Chart(document.getElementById("chartContainer5"), {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: ['TV보기', '동영상 시청', '독서', '아이돌보기', '친구와 통화하기', '공부하기'],
             datasets: [{ 
-                label: "항목",
+                label: "실내활동",
                 backgroundColor: ["red", "yellow", "green", "blue", "purple"],
                 data: chartData5
             }]
