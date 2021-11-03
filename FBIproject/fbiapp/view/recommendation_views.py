@@ -18,17 +18,8 @@ def input(request):
             # price= dict(form.fields['price'].choices)[form.cleaned_data['price']]
             price= form.cleaned_data['price']
 
-            print(type, topSheet, absorbent, madeIn, price)
-
-
             # 모델 결과 
-            # item1 ,item2 ,item3 ,item4 ,item5 = dnn.classify([[type, topSheet, absorbent, madeIn, price]])
-
-            item1 = dnn.classify([[type, topSheet, absorbent, madeIn, price]])
-            item2 = dnn.classify([[type, topSheet, absorbent, madeIn, price]])
-            item3 = dnn.classify([[type, topSheet, absorbent, madeIn, price]])
-            item4 = dnn.classify([[type, topSheet, absorbent, madeIn, price]])
-            item5 = dnn.classify([[type, topSheet, absorbent, madeIn, price]])
+            item1 ,item2 ,item3 ,item4 ,item5 = dnn.classify([[type, topSheet, absorbent, madeIn, price]])
 
             return render(request, 'fbiapp/recommendation/result.html', 
             {'datasets1' : item1, 'datasets2' : item2, 'datasets2' : item2, 'datasets3' : item3, 'datasets4' : item4, 'datasets5' : item5})
