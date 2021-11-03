@@ -39,8 +39,7 @@ def classify(data):
     device = torch.device('cpu')
 
     result = []
-
-    model_path = '/Users/user/Desktop/FBI/FBIproject/fbiapp/script/model/pretrained_'
+    model_path = '/Users/choisaywhy/Desktop/졸업작품/FBIproject/fbiapp/script/model/pretrained_'
 
     model_list = ['생리량', '생리통', '냄새', '신체활동', '실내활동']
     value_list = [0,1,2,3,4]
@@ -74,8 +73,11 @@ def classify(data):
         value, index = torch.max(output, 1)
 
         percentages = torch.nn.functional.softmax(output, dim=1)[0] * 100
-        print(percentages)
-        
-        result.append(percentages.tolist())
 
+        percentages = np.round(percentages.tolist(), 3).tolist()
+
+
+        result.append(percentages)
+    
+    print(result)
     return result
