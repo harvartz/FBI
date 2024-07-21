@@ -1,4 +1,4 @@
-# 백화점 애완 시설 예약 시스템, The pet
+# 여성용품 추천 시스템, FBI(Feminine product Based recommending algorIthm)
 
 <!-- 목차 -->
 <details>
